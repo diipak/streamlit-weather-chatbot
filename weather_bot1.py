@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[90]:
+# In[3]:
 
 
 import streamlit as st
@@ -33,6 +33,7 @@ async def get_weather(location):
             "wind_speed": weather.wind_speed,
             "kind": weather.kind,
             "uv": weather.ultraviolet,
+            "precipitation": weather.precipitation,
             "daily_forecasts": []
         }
 
@@ -63,6 +64,7 @@ async def get_weather_response(location, question):
     wind_speed = weather_data["wind_speed"]
     kind = weather_data["kind"]
     uv = weather_data["uv"]
+    precipitation = weather_data["precipitation"]
 
     prompt = f"""
     You are a weather chatbot. Given the following weather information and a question, provide a concise and informative answer.
@@ -76,6 +78,7 @@ async def get_weather_response(location, question):
     Wind Speed: {wind_speed} km/h
     Kind: {kind}
     UV Index: {uv}
+    Precipitation: {precipitation}
 
     Daily Forecasts:
     """
