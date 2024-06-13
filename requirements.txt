@@ -3,3 +3,5 @@ spacy==3.2.0
 thinc==8.0.13
 openai==0.27.0
 python-weather==2.0.3
+altair==4.2.0  # Added Altair to the dependencies
+python-dotenv==0.19.2  # Added python-dotenv for environment variable management
