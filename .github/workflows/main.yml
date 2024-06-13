@@ -35,17 +35,12 @@ jobs:
         run: |
           nohup streamlit run weather_bot1.py &
           sleep 10  # Sleep to ensure Streamlit starts
-          
 
       - name: Verify Streamlit app is running
         run: curl -f http://localhost:8501 || exit 1
-
-      - name: Check Streamlit Logs
-        run: tail -n 50 nohup.out
 
       - name: Post Set up Python
         run: echo "Post setup tasks for Python"
 
       - name: Post Checkout code
         run: echo "Post checkout tasks for code"
-
