@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # Set a timeout for the job
+    timeout-minutes: 30
 
     steps:
       - name: Checkout code
@@ -31,14 +31,21 @@ jobs:
       - name: Download Spacy model
         run: python -m spacy download en_core_web_sm
 
-      - name: Run Streamlit app
+      - name: Run Streamlit app in the background
         run: |
-          set -x  # Enable shell debugging
-          streamlit run weather_bot1.py --logger.level debug &
-          sleep 300  # Sleep for 5 minutes to inspect the state manually
+          nohup streamlit run weather_bot1.py &
+          sleep 10  # Sleep to ensure Streamlit starts
+          
+
+      - name: Verify Streamlit app is running
+        run: curl -f http://localhost:8501 || exit 1
+
+      - name: Check Streamlit Logs
+        run: tail -n 50 nohup.out
 
       - name: Post Set up Python
         run: echo "Post setup tasks for Python"
 
       - name: Post Checkout code
         run: echo "Post checkout tasks for code"
+
