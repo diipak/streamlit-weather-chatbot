@@ -9,15 +9,17 @@ from python_weather import Client
 import asyncio
 import spacy
 import openai
-import config
+import os
+from dotenv import load_dotenv
 
-# Load spaCy model
+# Load environment variables from .env file (if exists locally)
+load_dotenv()
+
+# Load spaCy model for natural language processing
 nlp = spacy.load("en_core_web_sm")
 
-
-# Set your OpenAI API key 
-openai.api_key = config.OPENAI_API_KEY
-
+# Get OpenAI API key (prioritize GitHub Secrets over .env file)
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # Function to get weather
 async def get_weather(location):
