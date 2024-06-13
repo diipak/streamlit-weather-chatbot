@@ -12,37 +12,36 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-  steps:
-   - name: Login to GHCR
-    uses: docker/login-action@v2
-    with:
-     registry: ghcr.io
-     username: diipak
-     password: ${{ secrets.GHCR_PAT }}
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: diipak
+          password: ${{ secrets.GHCR_PAT }}
 
       # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12" # Optional - specify the Python version you need
-    
+          python-version: "3.12"  # Optional - specify the Python version you need
+
       # Checkout the repository code
-      uses: actions/checkout@v3  # No dash (-) here
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       # Install project dependencies
       - name: Install dependencies
-        run: pip install -r requirements.txt 
-       
+        run: pip install -r requirements.txt
+
       # Run Streamlit app
       - name: Run Streamlit app
         run: streamlit run weather_bot1.py
         env:  
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
-
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
