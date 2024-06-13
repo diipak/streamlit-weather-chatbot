@@ -36,6 +36,7 @@ jobs:
     
       # Install project dependencies
       - name: Install dependencies
+      - uses: actions/checkout@v3
         run: pip install -r requirements.txt 
         
       # Run Streamlit app
